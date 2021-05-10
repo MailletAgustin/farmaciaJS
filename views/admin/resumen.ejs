@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resumen General</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+      integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <ul class="mt-5 mb-5 nav nav-pills nav-fill border">
+        <li class="nav-item">
+          <a class="nav-link active" href="resumen">Resumen general</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="stock">Control de Stock</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="informe">Informe Personalizado</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/desconectar">Desconectarse</a>
+        </li>
+      </ul>
+    </div>
+    <div class="container">
+      <% farmacias.forEach(farm => { arr = []; farm.products.forEach(producto =>
+      { arr.push(producto.cantidad); }); minStock = Math.min.apply(null, arr);
+      maxStock = Math.max.apply(null, arr); if (minStock >= 50) { buttonStateMin
+      = 'btn-success'; } if (minStock <= 25) { buttonStateMin = 'btn-warning'; }
+      if (minStock <= 5) { buttonStateMin = 'btn-danger'; } %>
+
+      <div class="farmTarjet">
+        <div class="row align-items-center">
+          <div class="col-3">
+            <p>Farmacia: <%= farm.farmaciaAsociada %></p>
+            <p>Username: <%= farm.username %></p>
+          </div>
+          <div class="col-3">
+            <button class="btn btn-success w-100 mb-2" disabled="disabled">
+              Mayor stock: <%= maxStock %>
+            </button>
+            <button
+              class="btn <%=buttonStateMin%> w-100 mb-2"
+              disabled="disabled"
+            >
+              Menor stock: <%= minStock %>
+            </button>
+          </div>
+          <div class="col-6">
+
+          </div>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-success">Crear nuevo usuario</button>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <style>
+    .farmTarjet {
+      margin-bottom: 10px;
+      border: 2px solid rgb(151, 151, 151);
+      padding: 20px;
+    }
+  </style>
+</html>
